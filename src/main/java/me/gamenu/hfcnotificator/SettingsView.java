@@ -1,2 +1,4 @@
-package me.gamenu.hfcnotificator;public class SettingsView {
+package me.gamenu.hfcnotificator;
+
+public class SettingsView {
 }
