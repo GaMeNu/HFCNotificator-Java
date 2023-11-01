@@ -13,11 +13,17 @@ public class BackgroundTask {
             SystemTray systemTray = SystemTray.getSystemTray();
 
             PopupMenu popup = new PopupMenu();
-            MenuItem menuItem = new MenuItem("Exit");
+            MenuItem exitItem = new MenuItem("Exit");
 
-            menuItem.addActionListener(e -> System.exit(0));
+            exitItem.addActionListener(e -> System.exit(0));
 
-            popup.add(menuItem);
+            MenuItem settingsItem = new MenuItem("Settings");
+
+            //TODO need to add open settings
+            //settingsItem.addActionListener(e -> );
+
+            popup.add(settingsItem);
+            popup.add(exitItem);
 
             TrayIcon trayIcon = new TrayIcon(icon, "HFC Notificator", popup);
 
@@ -40,7 +46,7 @@ public class BackgroundTask {
             }
         });
 
-        backgroundThread.setDaemon(true);
+        backgroundThread.setDaemon(false);
 
         backgroundThread.start();
     }
