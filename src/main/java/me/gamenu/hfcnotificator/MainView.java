@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 import java.awt.*;
 import java.io.IOException;
 
-public class MainView extends Application {
+public class MainView{
 
     @FXML
     Label tv_alertZone;
@@ -25,20 +25,31 @@ public class MainView extends Application {
     @FXML
     HBox hbox_alertZones;
 
-    public static void launchApp(String[] args) {
-        launch();
-    }
+    public MainView(Stage stage) throws IOException {
+        BackgroundTask task = new BackgroundTask();
+        task.setStage(stage);
+        Thread backgroundThread = task.create();
 
-    @Override
-    public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(MainView.class.getResource("main-view.fxml"));
-        Rectangle2D bounds = Screen.getPrimary().getBounds();
-        Scene scene = new Scene(fxmlLoader.load(), bounds.getMaxX(), bounds.getMaxY());
-        stage.setScene(scene);
-        stage.setMaximized(true);
-        stage.setTitle("Hello world!");
+        Scene scene = getMainScene(stage);
+
+        setScene(stage, scene, "HFC Notificator Desktop");
 
         stage.show();
 
+    }
+
+    public static Scene getMainScene(Stage stage) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(MainView.class.getResource("main-view.fxml"));
+        Rectangle2D bounds = Screen.getPrimary().getBounds();
+        Scene scene = new Scene(fxmlLoader.load(), bounds.getMaxX(), bounds.getMaxY());
+        MainController controller = fxmlLoader.getController();
+        controller.setStage(stage);
+        return scene;
+    }
+    
+    public void setScene(Stage stage, Scene scene, String title){
+        stage.setScene(scene);
+        stage.setMaximized(true);
+        stage.setTitle(title);
     }
 }
