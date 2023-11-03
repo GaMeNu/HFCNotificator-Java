@@ -1,44 +1,26 @@
 package me.gamenu.hfcnotificator;
 
-import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Rectangle2D;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.stage.Screen;
-import javafx.stage.Stage;
+import javafx.scene.layout.AnchorPane;
+import me.gamenu.hfcnotificator.stage.StageContext;
 
-import java.awt.*;
 import java.io.IOException;
 
-public class MainView extends Application {
+public class MainView extends AnchorPane {
 
-    @FXML
-    Label tv_alertZone;
+    StageContext stageContext;
+    FXMLLoader loader;
 
-    @FXML
-    ImageView img_alertStatus;
+    public MainView(StageContext stageCtx) throws IOException {
+        this.loader = new FXMLLoader(MainView.class.getResource("main-view.fxml"));
+        this.loader.load();
+        this.stageContext = stageCtx;
+        MainController controller = this.loader.getController();
+        controller.setStageContext(stageCtx);
 
-    @FXML
-    HBox hbox_alertZones;
-
-    public static void launchApp(String[] args) {
-        launch();
     }
 
-    @Override
-    public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(MainView.class.getResource("main-view.fxml"));
-        Rectangle2D bounds = Screen.getPrimary().getBounds();
-        Scene scene = new Scene(fxmlLoader.load(), bounds.getMaxX(), bounds.getMaxY());
-        stage.setScene(scene);
-        stage.setMaximized(true);
-        stage.setTitle("Hello world!");
-
-        stage.show();
-
+    public FXMLLoader getLoader() {
+        return loader;
     }
 }
