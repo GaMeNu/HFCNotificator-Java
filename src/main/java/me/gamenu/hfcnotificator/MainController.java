@@ -4,10 +4,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.stage.Stage;
 import me.gamenu.hfcnotificator.stage.StageContext;
 
 import java.io.IOException;
@@ -33,9 +33,9 @@ public class MainController {
 
         Scene settingsScene = new Scene(settingsView.load());
 
+        ((SettingsController) settingsView.getController()).setStageContext(stageContext);
+
         this.stageContext.setScene(settingsScene);
-        this.stageContext.getStage().setMaximized(false);
-        this.stageContext.getStage().setMaximized(true);
 
     }
 

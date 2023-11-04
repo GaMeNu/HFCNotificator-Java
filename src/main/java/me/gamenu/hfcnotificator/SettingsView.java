@@ -2,25 +2,30 @@ package me.gamenu.hfcnotificator;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
+import me.gamenu.hfcnotificator.stage.StageContext;
 
 import java.io.IOException;
 
 public class SettingsView extends AnchorPane {
 
-    Stage stage;
+    StageContext stageContext;
 
     FXMLLoader loader;
 
-    public SettingsView(Stage stage) throws IOException {
+    public SettingsView(StageContext stageContext) throws IOException {
         this.loader = new FXMLLoader(SettingsView.class.getResource("settings-view.fxml"));
         this.loader.load();
 
-        this.stage = stage;
+        this.stageContext = stageContext;
 
     }
 
     public FXMLLoader getLoader() {
         return loader;
+    }
+
+    public void setStageContext(StageContext stageContext) {
+        this.stageContext = stageContext;
+        ((SettingsController) this.loader.getController()).setStageContext(stageContext);
     }
 }
